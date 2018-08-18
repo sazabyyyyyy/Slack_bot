@@ -1,6 +1,10 @@
 from slackbot.bot import respond_to  # @botname：で反応するデコーダ
 from slackbot.bot import default_reply  # 該当する応答がない場合に反応するデコーダー
 
+
+
+
+#@respond_to()
 @respond_to('てんき')
 @respond_to('天気')
 def weather(message):
@@ -19,7 +23,16 @@ def weather(message):
     jsonfile = json.loads(html.read().decode('utf-8'))  # 上記のurlを読み込んだjsonfileをロードし、デコード変換して変数に代入
 
     title = jsonfile['title']
-    telop = jsonfile['forecasts'][0]['telop']
+
+    telop = jsonfile['forecasts'][0]['telop']  # jsonfile内の配列forecastsの0番目（今日の天気）のtelop項目
+    day = jsonfile['forecasts'][0]['dateLabel']
+
+    telop1 = jsonfile['forecasts'][1]['telop']  # 配列forecastsの1番目（明日の天気）のtelop項目
+    day1 = jsonfile['forecasts'][1]['dateLabel']
+
+    telop2 = jsonfile['forecasts'][2]['telop']  # 配列forecastsの2番目（明後日の天気）のtelop項目
+    day2 = jsonfile['forecasts'][2]['dateLabel']
+
     # telopが晴れだったら晴れのスラックのアイコンとか場合分け
     telop_icon = ''
     if telop.find('雪') > -1:
@@ -39,8 +52,74 @@ def weather(message):
         telop_icon = ':cloud:'
     else:
         telop_icon = ':fire:'
-    text = title + '\n' + '今日の天気　' + telop + telop_icon
+
+    telop1_icon = ''
+    if telop1.find('雪') > -1:
+        telop1_icon = ':showman:'
+    elif telop1.find('雷') > -1:
+        telop1_icon = ':thinder_cloud_and_rain:'
+    elif telop1.find('晴') > -1:
+        if telop1.find('曇') > -1:
+            telop1_icon = ':partly_sunny:'
+        elif telop1.find('雨') > -1:
+            telop1_icon = ':partly_sunny_rain:'
+        else:
+            telop1_icon = ':sunny:'
+    elif telop1.find('雨') > -1:
+        telop1_icon = ':umbrella:'
+    elif telop1.find('曇') > -1:
+        telop1_icon = ':cloud:'
+    else:
+        telop1_icon = ':fire:'
+
+    telop2_icon = ''
+    if telop2.find('雪') > -1:
+        telop2_icon = ':showman:'
+    elif telop2.find('雷') > -1:
+        telop2_icon = ':thinder_cloud_and_rain:'
+    elif telop2.find('晴') > -1:
+        if telop2.find('曇') > -1:
+            telop2_icon = ':partly_sunny:'
+        elif telop2.find('雨') > -1:
+            telop2_icon = ':partly_sunny_rain:'
+        else:
+            telop2_icon = ':sunny:'
+    elif telop2.find('雨') > -1:
+        telop2_icon = ':umbrella:'
+    elif telop2.find('曇') > -1:
+        telop2_icon = ':cloud:'
+    else:
+        telop2_icon = ':fire:'
+
+    text = title + '\n' + day + 'は' + telop + telop_icon + '\n' + day1 + 'は' + telop1 + telop1_icon + '\n' + day2 + 'は' + telop2 + telop2_icon+"だにゃ"
+
     message.send(text)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # @respond_to('string')     bot宛のメッセージ
     #                           stringは正規表現が可能 「r'string'」
