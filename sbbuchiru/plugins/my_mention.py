@@ -1,7 +1,8 @@
 from slackbot.bot import respond_to  # @botname：で反応するデコーダ
 from slackbot.bot import default_reply  # 該当する応答がない場合に反応するデコーダー
+from slackbot.bot import listen_to
 
-
+@listen_to('ぶちる')
 @respond_to('ぶちる')
 def mention_func(message):
     message.reply('気安く呼ぶな')  # メンション
@@ -16,6 +17,23 @@ def mention_func1(message):
 def defaoult_func(messege):
     messege.reply('にゃああああああああ')  # メンション
 
+
+@respond_to("疲れた")
+@respond_to('かえる')
+@respond_to('つかれた')
+@respond_to('おわた')
+@respond_to('仕事終わった')
+def mention_func1(message):
+    message.reply('お疲れ')  # メンション
+
+
+@listen_to("疲れた")
+@listen_to('かえる')
+@listen_to('つかれた')
+@listen_to('おわた')
+@listen_to('仕事終わった')
+def mention_func1(message):
+    message.reply('お疲れ')
 
 
 
