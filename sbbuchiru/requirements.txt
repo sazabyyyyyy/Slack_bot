@@ -1,1 +1,1 @@
-slack_bot
+slackbot
