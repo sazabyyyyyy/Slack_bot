@@ -3,6 +3,8 @@
 ・Windows10 <br>
 ・Pycharm Free Community <br>
 ・Python3.6.3 <br>
+・RaspberryPi(サーバー）<br>
+・Atom(Windowsからのラズパイ上のPyhonファイル操作）<br>
 
 ## 仕様　<br>
 ・replyに応じた返答　<br>
