@@ -1,10 +1,9 @@
 # Slack_bot
 ## 開発環境　<br>
 ・Windows10 <br>
-・Pycharm Free Community <br>
+・Pycharm  <br>
 ・Python3.6.3 <br>
-・RaspberryPi(サーバー）<br>
-・Atom(Windowsからのラズパイ上のPyhonファイル操作）<br>
+・RaspberryPi(Webサーバー）<br>
 
 ## 仕様　<br>
 ・replyに応じた返答　<br>
